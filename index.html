@@ -3,216 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Saya</title>
+    <title>Bank Soal Matematika</title>
+
+    <!-- Library MathJax untuk merender format LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        /* Reset & Font Dasar */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
-            background-color: #131314;
-            color: #e3e3e3;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow-x: hidden;
-        }
-
-        /* Navigasi Atas */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #4285f4, #9b51e0, #e91e63);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        nav a {
-            color: #c4c7c5;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffffff;
-        }
-
-        /* Area Utama (Hero) */
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-
-        /* Efek Cahaya / Glow Latar Belakang */
-        main::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(66,133,244,0.15) 0%, rgba(155,81,224,0.1) 50%, transparent 70%);
-            top: 20%;
-            z-index: 0;
-            filter: blur(50px);
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-            z-index: 1;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #4285f4, #d96570);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            color: #8e918f;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            z-index: 1;
-        }
-
-        /* Kotak Chat / Input Utama */
-        .chat-box {
-            background-color: #1e1f20;
-            border: 1px solid #444746;
-            border-radius: 28px;
-            width: 100%;
-            max-width: 680px;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            transition: border-color 0.3s;
-        }
-
-        .chat-box:focus-within {
-            border-color: #a8c7fa;
-        }
-
-        .chat-box input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #e3e3e3;
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        .chat-box button {
-            background-color: #a8c7fa;
-            color: #040e25;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-
-        .chat-box button:hover {
-            background-color: #d3e3fd;
-        }
-
-        /* Kartu Fitur / Pilihan */
-        .cards-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            z-index: 1;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .card {
-            background-color: #1e1f20;
-            border-radius: 12px;
-            padding: 16px 20px;
-            width: 160px;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #c4c7c5;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .card:hover {
-            background-color: #2a2b2d;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            color: #8e918f;
-            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0d6efd;
+            margin-bottom: 30px;
+        }
+
+        /* Kartu Soal */
+        .soal-card {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .soal-title {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        /* Styling Fitur Buka/Tutup Pembahasan */
+        details {
+            margin-top: 15px;
+            background-color: #f1f3f5;
+            border-radius: 6px;
+            padding: 10px 15px;
+        }
+
+        summary {
+            font-weight: bold;
+            color: #0d6efd;
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+        }
+
+        summary:hover {
+            color: #0b5ed7;
+        }
+
+        .pembahasan-content {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ced4da;
+            color: #343a40;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigasi -->
-    <header>
-        <div class="logo">MyAI</div>
-        <nav>
-            <a href="#">Beranda</a>
-            <a href="#">Tentang</a>
-            <a href="#">Proyek</a>
-        </nav>
-    </header>
+    <h1>Bank Soal Matematika</h1>
 
-    <!-- Konten Utama -->
-    <main>
-        <h1 class="hero-title">Halo, <span class="gradient-text">Ada yang bisa kubantu?</span></h1>
-        <p class="hero-subtitle">Coba ketik pesan atau pilih topik di bawah ini.</p>
+    <!-- Soal Nomor 1 -->
+    <div class="soal-card">
+        <div class="soal-title">Soal 1: Persamaan Kuadrat</div>
+        <p>Tentukan akar-akar dari persamaan kuadrat berikut:</p>
+        <p>$$x^2 - 5x + 6 = 0$$</p>
 
-        <!-- Input Box ala Gemini -->
-        <div class="chat-box">
-            <input type="text" placeholder="Masukkan pertanyaan atau perintah di sini...">
-            <button>&#10140;</button>
-        </div>
+        <!-- Fitur Buka/Tutup Pembahasan -->
+        <details>
+            <summary>Lihat Pembahasan</summary>
+            <div class="pembahasan-content">
+                <p><strong>Langkah Penyelesaian:</strong></p>
+                <p>Cari dua bilangan yang jika dikalikan menghasilkan $6$ dan jika dijumlahkan menghasilkan $-5$. Bilangan tersebut adalah $-2$ dan $-3$.</p>
+                <p>$$(x - 2)(x - 3) = 0$$</p>
+                <p>Maka diperoleh:</p>
+                <p>$$x_1 = 2 \quad \text{atau} \quad x_2 = 3$$</p>
+            </div>
+        </details>
+    </div>
 
-        <!-- Kartu Saran -->
-        <div class="cards-container">
-            <div class="card">💡 Ide proyek web terbaru</div>
-            <div class="card">💻 Lihat portofolio saya</div>
-            <div class="card">✉️ Hubungi lewat email</div>
-        </div>
-    </main>
+    <!-- Soal Nomor 2 -->
+    <div class="soal-card">
+        <div class="soal-title">Soal 2: Integral Tentu</div>
+        <p>Hitunglah nilai dari integral berikut:</p>
+        <p>$$\int_{1}^{3} (2x + 1) \, dx$$</p>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Nama Kamu. Dibuat dengan GitHub Pages.</p>
-    </footer>
+        <details>
+            <summary>Lihat Pembahasan</summary>
+            <div class="pembahasan-content">
+                <p><strong>Langkah Penyelesaian:</strong></p>
+                <p>Integralkan fungsi di dalam kurung terlebih dahulu:</p>
+                <p>$$\int (2x + 1) \, dx = \left[ x^2 + x \right]_{1}^{3}$$</p>
+                <p>Substitusikan batas atas ($3$) dan batas bawah ($1$):</p>
+                <p>$$= (3^2 + 3) - (1^2 + 1)$$</p>
+                <p>$$= (9 + 3) - (1 + 1) = 12 - 2 = 10$$</p>
+            </div>
+        </details>
+    </div>
 
 </body>
 </html>
